@@ -35,3 +35,28 @@ Notes on java.util.concurrency package
 	* The Lock API provides a method lockInterruptibly() which can be used to interrupt the thread when it’s waiting for the lock.
 
 * *Phaser*: Phaser is a more flexible solution than CyclicBarrier and CountDownLatch – used to act as a reusable barrier on which the dynamic number of threads need to wait before continuing execution. We can coordinate multiple phases of execution, reusing a Phaser instance for each program phase.
+
+Thread Life Cycle
+
+Different States in a thread lifecycle
+New -> Runnable ( Ready to Run -> Running ) -> Terminated
+
+* *NEW* – newly created thread that has not yet started the execution. Remains in this state unless we start it by using the /start()/ method
+
+* *RUNNABLE* – either running or ready for execution but it’s waiting for resource allocation
+
+* *BLOCKED* – waiting to acquire a monitor lock to enter or re-enter a synchronized block/method
+
+* *WAITING* – waiting for some other thread to perform a particular action without any time limit. Any thread can enter this state by calling any one of following three methods:
+	1. object.wait()
+	2. thread.join() 
+	3. LockSupport.park()
+
+* *TIMED_WAITING* – waiting for some other thread to perform a specific action for a specified period. Any thread can enter this state by calling any one of following three methods:
+	1. thread.sleep(long millis)
+	2. wait(int timeout) or wait(int timeout, int nanos)
+	3. thread.join(long millis)
+	4. LockSupport.parkNanos
+	5. LockSupport.parkUntil
+
+* *TERMINATED* – has completed its execution
